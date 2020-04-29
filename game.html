@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--This is a script to simulate Rock Paper Scissors-->
+<html>
+<head>
+    <title>Rock Paper Scissors</title>
+    <meta charset="UTF-8"/>
+    <!--<link rel="stylesheet" href="homepagestyle.css">-->
+</head>
+<body>
+    <script>
+    //This function randomly returns Rock Paper or Scissors as part of the computer playing 
+    function computerPlay(){
+        //Get a randnum between 0 and 3
+        const randnum = Math.random() * 3;
+        //Rock
+        if (randnum >= 0 && randnum < 1){
+            return "Rock";
+        }
+        //Paper
+        else if (randnum >= 1 && randnum < 2){
+            return "Paper";
+        }
+        //Scissors
+        else{
+            return "Scissors";
+        }
+    }
+
+    //This function takes paramters playerSelection and computerSelection and returns the winner of the round as a string
+    function playRound(playerSelection, computerSelection){
+        playerSelection = playerSelection.toLowerCase();
+        computerSelection = computerSelection.toLowerCase();
+        switch(true){
+            case (playerSelection === computerSelection):
+                return "Tie Game!";
+                break;
+            case (playerSelection === "rock" && computerSelection === "paper"):
+                return "You Lose! Paper beats Rock";
+                break;
+            case (playerSelection ==="rock" && computerSelection === "scissors"):
+                return "You Win! Rock beats Scissors"
+                break;
+            case (playerSelection ==="paper" && computerSelection === "rock"):
+                return "You Win! Paper beats Rock"
+                break;
+            case (playerSelection ==="paper" && computerSelection === "scissors"):
+                return "You Lose! Scissors beats Paper"
+                break;
+            case (playerSelection ==="scissors" && computerSelection === "rock"):
+                return "You Lose! Rock beats Scissors"
+                break;
+            case (playerSelection ==="scissors" && computerSelection === "paper"):
+                return "You Win! Scissors beats Paper"
+                break;
+        }
+    }
+
+    //This function called game() plays 5 rounds of the game and reports winner or loser
+    function game(){
+        let i;
+        let mecount = 0;
+        let compcount = 0;
+        for (i=0; i<5; i++){
+            const mythrow = prompt("Rock Paper or Scissors?");
+            const compthrow = computerPlay();
+            let result = playRound(mythrow, compthrow);
+            //if tie
+            if (result.includes("Tie")){
+                mecount++;
+                compcount++;
+                console.log("Round" + i + " Tie")
+            }
+            //if you lost
+            else if (result.includes("Lose")){
+                compcount++;
+                console.log("Round" + i + " Loss")
+            }
+            //if you won
+            else {
+                mecount++;
+                console.log("Round" + i + " Win")
+            }
+        }
+        if (mecount > compcount){
+            return "You are the grand winner";
+        } else {
+            return "You are the grand loser";
+        }
+
+    }
+
+
+
+    console.log(game())
+
+    </script>
+<!--Code goes here-->
+</body>
+</html>
